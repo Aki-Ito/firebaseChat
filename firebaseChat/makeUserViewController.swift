@@ -18,7 +18,7 @@ class makeUserViewController: UIViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-   
+    let storageRef = Storage.storage().reference()
     
     
     override func viewDidLoad() {
@@ -55,14 +55,37 @@ class makeUserViewController: UIViewController {
                 return
             }
             
-            let addData = [
-                "userName": self.userNameTextField.text!
-            ]
+            self.storageRef.child("userProfile").child("\(authResult.user.uid).jpg")
             
-            let db = Firebase.Firestore.firestore()
-            db.collection("users")
-                .document(authResult.user.uid)
-                .setData(addData)
+            guard let image = self.userProfileButton.imageView?.image else{
+                return
+            }
+            
+            guard let uploadImage = image.jpegData(compressionQuality: 0.2) else {
+                        return
+                    }
+            
+            self.storageRef.putData(uploadImage, metadata: nil){(metadata, err) in
+                if let error = err{
+                    print("error: \(error)")
+                }
+            }
+            
+          
+                
+                let addData = [
+                    "userName": self.userNameTextField.text!
+                ]
+                
+                
+                let db = Firebase.Firestore.firestore()
+                db.collection("users")
+                    .document(authResult.user.uid)
+                    .setData(addData)
+                
+                return
+            
+            
         }
         
     }
