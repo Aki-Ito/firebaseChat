@@ -8,7 +8,7 @@ target 'firebaseChat' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
-
+  pod 'FirebaseUI/Storage'
   # Pods for firebaseChat
 
   target 'firebaseChatTests' do

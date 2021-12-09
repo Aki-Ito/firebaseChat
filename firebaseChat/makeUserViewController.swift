@@ -18,7 +18,7 @@ class makeUserViewController: UIViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    let storageRef = Storage.storage().reference()
+    let storageRef = Storage.storage().reference(forURL: "gs://fir-chat-f0685.appspot.com")
     
     
     override func viewDidLoad() {
@@ -55,7 +55,7 @@ class makeUserViewController: UIViewController {
                 return
             }
             
-            self.storageRef.child("userProfile").child("\(authResult.user.uid).jpg")
+            let reference = self.storageRef.child("userProfile").child("\(authResult.user.uid).jpg")
             
             guard let image = self.userProfileButton.imageView?.image else{
                 return
@@ -65,7 +65,7 @@ class makeUserViewController: UIViewController {
                         return
                     }
             
-            self.storageRef.putData(uploadImage, metadata: nil){(metadata, err) in
+            reference.putData(uploadImage, metadata: nil){(metadata, err) in
                 if let error = err{
                     print("error: \(error)")
                 }
@@ -82,8 +82,6 @@ class makeUserViewController: UIViewController {
                 db.collection("users")
                     .document(authResult.user.uid)
                     .setData(addData)
-                
-                return
             
             
         }
