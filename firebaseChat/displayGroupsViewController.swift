@@ -10,12 +10,11 @@ import Firebase
 import FirebaseFirestore
 
 class displayGroupsViewController: UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     let db = Firebase.Firestore.firestore()
     var groupId: String = ""
-    var groupIdCollection: [String] = [""]
     var addresses: [[String : String]] = []
     
     var viewWidth: CGFloat! //viewの横幅
@@ -23,8 +22,8 @@ class displayGroupsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,33 +41,43 @@ class displayGroupsViewController: UIViewController {
         db.collection("groups")
             .addSnapshotListener{ (querySnapshot, err) in
                 guard let snapshot = querySnapshot else{
-                       print(err!)
-                       return
-                   }
+                    print(err!)
+                    return
+                }
                 
                 self.addresses.removeAll()
                 
                 for doc in snapshot.documents{
                     
                     let roomName = doc.data()["roomName"] as! String
-                    self.addresses.append(["roomName": roomName])
-                    self.groupIdCollection.append(doc.documentID)
+                    let docID = doc.documentID
+                    self.addresses.append(["roomName": roomName,
+                                           "docID": docID])
                     self.collectionView.reloadData()
                 }
             }
+        print("addresses: \(addresses)")
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toChat"{
+            let vc = segue.destination as! chatViewController
+            vc.sentGroupId = self.groupId
+            print("groupId: \(groupId)")
+        }
     }
-    */
-
+    
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension displayGroupsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -88,7 +97,7 @@ extension displayGroupsViewController: UICollectionViewDelegate, UICollectionVie
         cell.layer.masksToBounds = false
         cell.groupLabel.text = addresses[indexPath.row]["roomName"]
         
-        groupId = groupIdCollection[indexPath.row]
+        print("groupId: \(groupId)")
         
         return cell
     }
@@ -102,6 +111,7 @@ extension displayGroupsViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        groupId = addresses[indexPath.row]["docID"]!
         self.performSegue(withIdentifier: "toChat", sender: nil)
     }
     
