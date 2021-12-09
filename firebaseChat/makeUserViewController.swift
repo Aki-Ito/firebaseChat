@@ -12,7 +12,7 @@ import FirebaseAuth
 import FirebaseStorage
 
 class makeUserViewController: UIViewController {
-
+    
     @IBOutlet weak var userProfileButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var userNameTextField: UITextField!
@@ -23,10 +23,10 @@ class makeUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     @IBAction func tappedProfileButton(_ sender: Any) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -62,8 +62,8 @@ class makeUserViewController: UIViewController {
             }
             
             guard let uploadImage = image.jpegData(compressionQuality: 0.2) else {
-                        return
-                    }
+                return
+            }
             
             reference.putData(uploadImage, metadata: nil){(metadata, err) in
                 if let error = err{
@@ -71,28 +71,36 @@ class makeUserViewController: UIViewController {
                 }
             }
             
-          
-                
-                let addData = [
-                    "userName": self.userNameTextField.text!
-                ]
-                
-                
-                let db = Firebase.Firestore.firestore()
-                db.collection("users")
-                    .document(authResult.user.uid)
-                    .setData(addData)
             
+            
+            let addData = [
+                "userName": self.userNameTextField.text!
+            ]
+            
+            
+            let db = Firebase.Firestore.firestore()
+            db.collection("users")
+                .document(authResult.user.uid)
+                .setData(addData)
+            
+            self.transition()
             
         }
         
+    }
+    
+    func transition(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let tabView = storyboard.instantiateViewController(withIdentifier: "tab") as! UITabBarController
+        tabView.selectedIndex = 0
+        self.present(tabView, animated: true, completion: nil)
     }
 }
 
 extension makeUserViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            //サイズなどを変えた際に受け取るイメージ
+        //サイズなどを変えた際に受け取るイメージ
         if let image = info[.editedImage] as? UIImage{
             userProfileButton.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
             //大きさが何も変わっていない

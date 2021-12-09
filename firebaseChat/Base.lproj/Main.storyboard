@@ -193,18 +193,19 @@
                         <viewLayoutGuide key="safeArea" id="dBG-cd-vDH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Kg1-r9-k7K"/>
                     <connections>
                         <outlet property="emailTextField" destination="KOD-mx-i6W" id="kPy-QT-lRH"/>
                         <outlet property="passwordTextField" destination="Cqc-u5-7ge" id="gO3-n7-I8X"/>
                         <outlet property="userNameTextField" destination="kyN-g6-vcj" id="jF0-KD-XDK"/>
                         <outlet property="userProfileButton" destination="Xz6-Cm-ZHy" id="0Un-W1-RKY"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="toLogin" id="TwW-kd-SNW"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="toLogin" id="SJD-2m-FMr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0rp-pm-pKH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="j7Q-gQ-uzu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="764" y="-581"/>
+            <point key="canvasLocation" x="851" y="-628"/>
         </scene>
         <!--Approve User View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -299,32 +300,25 @@
                                                 <buttonConfiguration key="configuration" style="filled" title="Login"/>
                                                 <connections>
                                                     <action selector="tappedAddButton:" destination="0mB-ec-ldz" eventType="touchUpInside" id="BT5-A1-Qtl"/>
+                                                    <action selector="tappedLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GWA-mB-kTn"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kv1-m0-OdM">
-                                                <rect key="frame" x="57" y="44" width="300" height="69"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kv1-m0-OdM">
+                                                <rect key="frame" x="167.5" y="201.5" width="79" height="39.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0fO-4c-crC">
-                                                <rect key="frame" x="157" y="177" width="100" height="100"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="100" id="1y9-s3-f35"/>
-                                                    <constraint firstAttribute="width" constant="100" id="Jbo-aP-i3Q"/>
-                                                </constraints>
-                                            </imageView>
                                         </subviews>
                                         <viewLayoutGuide key="safeArea" id="jcW-gL-QXM"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="9Ty-8y-hLg" firstAttribute="top" secondItem="0fO-4c-crC" secondAttribute="bottom" constant="60" id="38e-3D-l0f"/>
+                                            <constraint firstItem="9Ty-8y-hLg" firstAttribute="top" secondItem="Kv1-m0-OdM" secondAttribute="bottom" constant="96" id="38O-a9-Ue0"/>
                                             <constraint firstItem="Yqu-uo-9j8" firstAttribute="centerX" secondItem="3Q6-ab-Ouf" secondAttribute="centerX" id="Rbg-Kj-mER"/>
                                             <constraint firstItem="9Ty-8y-hLg" firstAttribute="centerX" secondItem="3Q6-ab-Ouf" secondAttribute="centerX" id="hv5-b8-Hti"/>
                                             <constraint firstItem="Yqu-uo-9j8" firstAttribute="top" secondItem="9Ty-8y-hLg" secondAttribute="bottom" constant="64" id="lge-Eo-BLp"/>
                                             <constraint firstItem="jcW-gL-QXM" firstAttribute="bottom" secondItem="Yqu-uo-9j8" secondAttribute="bottom" constant="248" id="raj-vo-Pd1"/>
-                                            <constraint firstItem="0fO-4c-crC" firstAttribute="centerX" secondItem="3Q6-ab-Ouf" secondAttribute="centerX" id="sdX-yK-E60"/>
+                                            <constraint firstItem="Kv1-m0-OdM" firstAttribute="centerX" secondItem="3Q6-ab-Ouf" secondAttribute="centerX" id="tUS-uc-gJz"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -343,14 +337,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="XEZ-N5-wBD"/>
                     <connections>
-                        <outlet property="imageView" destination="0fO-4c-crC" id="45U-CV-iDq"/>
                         <outlet property="passwordTextField" destination="fh8-dl-gw4" id="XkX-sQ-O3S"/>
                         <outlet property="userNameTextField" destination="1LI-Cl-gP9" id="xJZ-Ys-UGy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1701" y="-581"/>
+            <point key="canvasLocation" x="1677" y="-628"/>
         </scene>
         <!--Item-->
         <scene sceneID="Bym-RH-sLQ">
@@ -554,8 +547,9 @@
         <!--Tab Bar Controller-->
         <scene sceneID="tgx-J0-hqj">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="6Iw-Hp-2Eo" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tab" automaticallyAdjustsScrollViewInsets="NO" id="6Iw-Hp-2Eo" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Krn-32-SRn"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vJz-sj-PMt">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -573,7 +567,7 @@
         <!--Item-->
         <scene sceneID="B0n-yH-o2S">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sMx-Rn-rns" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="nav" automaticallyAdjustsScrollViewInsets="NO" id="sMx-Rn-rns" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="bY2-6S-fAh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aRW-pO-oHe">
