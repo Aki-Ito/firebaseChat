@@ -107,6 +107,16 @@ class chatViewController: UIViewController {
     override var canBecomeFirstResponder: Bool{
         return true
     }
+    
+//    func recognizeUser(indexPath: IndexPath){
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! chatTableViewCell
+//
+//        guard let user = user else { return }
+//        let uid: String =  addresses[indexPath.row]["userUid"] as! String
+//        if uid == user.uid{
+//
+//        }
+//    }
 
 
 }
@@ -121,7 +131,7 @@ extension chatViewController: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! chatTableViewCell
         
         let text = addresses[indexPath.row]["chatContent"] as! String
-        cell.messageText = text
+        cell.classmateMessageText = text
         print("messageText: \(text)")
         return cell
     }

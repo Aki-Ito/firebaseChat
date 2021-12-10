@@ -9,24 +9,37 @@ import UIKit
 
 class chatTableViewCell: UITableViewCell {
     
-    var messageText: String?{
+    var classmateMessageText: String?{
         didSet{
-            guard let message = messageText else {return}
+            guard let message = classmateMessageText else {return}
             let width = estimateTextViewSize(text: message).width + 20
             
-            textViewWidthConstraint.constant = width
+            classmateTextViewConstraint.constant = width
             classmateTextView.text = message
         }
     }
     
+    var myMessageText: String?{
+        didSet{
+            guard let message = myMessageText else {return}
+            let width = estimateTextViewSize(text: message).width + 20
+            myTextViewConstraint.constant = width
+            myTextView.text = message
+        }
+    }
+    
+    
     @IBOutlet weak var classmateImageView: UIImageView!
     
     @IBOutlet weak var classmateTextView: UITextView!
+    @IBOutlet weak var myTextView: UITextView!
     
-    @IBOutlet weak var textViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var myTextViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var classmateTextViewConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .clear
+        myTextView.isHidden = true
         // Initialization code
         updateUI()
     }
