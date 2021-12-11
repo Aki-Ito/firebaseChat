@@ -16,6 +16,7 @@ class makeRoomViewController: UIViewController {
     @IBOutlet weak var roomNumberTextField: UITextField!
     
     let db = Firebase.Firestore.firestore()
+    let storageRef = Storage.storage().reference(forURL: "gs://fir-chat-f0685.appspot.com")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,8 @@ class makeRoomViewController: UIViewController {
             "roomNumber": roomNumberTextField.text!
         ]
         
+        
+        
         db.collection("groups")
             .addDocument(data: addData){ err in
                 
@@ -52,9 +55,31 @@ class makeRoomViewController: UIViewController {
                     print("保存に失敗しました：\(error)")
                 }
                 
+                let reference = self.storageRef.child("groupProfile").child("\(self.roomNameTextField.text!).jpg")
+                
+                guard let image = self.profileButton.imageView?.image else{
+                    return
+                }
+                
+                guard let uploadImage = image.jpegData(compressionQuality: 0.2) else {
+                    return
+                }
+                
+                reference.putData(uploadImage, metadata: nil){ (metaData, err) in
+                    if let error = err {
+                        print("error: \(error)")
+                    }
+                }
+                
+                
+                
             }
         
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func loadImage(){
+        
     }
     /*
     // MARK: - Navigation

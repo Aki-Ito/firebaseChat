@@ -8,12 +8,15 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import FirebaseStorage
+import FirebaseStorageUI
 
 class displayGroupsViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     let db = Firebase.Firestore.firestore()
+    let storageRef = Storage.storage().reference(forURL: "gs://fir-chat-f0685.appspot.com")
     var groupId: String = ""
     var addresses: [[String : String]] = []
     
@@ -22,7 +25,6 @@ class displayGroupsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
     }
     
@@ -53,6 +55,7 @@ class displayGroupsViewController: UIViewController {
                     let docID = doc.documentID
                     self.addresses.append(["roomName": roomName,
                                            "docID": docID])
+                    
                     self.collectionView.reloadData()
                 }
             }
@@ -96,6 +99,10 @@ extension displayGroupsViewController: UICollectionViewDelegate, UICollectionVie
         cell.layer.shadowOffset = CGSize(width: 2, height: 3) //影の方向
         cell.layer.masksToBounds = false
         cell.groupLabel.text = addresses[indexPath.row]["roomName"]
+        
+        let groupName: String = addresses[indexPath.row]["roomName"]!
+        let reference = storageRef.child("groupProfile").child("\(groupName).jpg")
+        cell.groupImageView.sd_setImage(with: reference)
         
         print("groupId: \(groupId)")
         
