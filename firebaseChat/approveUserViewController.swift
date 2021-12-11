@@ -18,7 +18,7 @@ class approveUserViewController: UIViewController {
     
     let auth = Auth.auth()
     
-    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ class approveUserViewController: UIViewController {
     }
     
     @IBAction func tappedLoginButton(_ sender: Any) {
-        signInUser(emailText: userNameTextField.text!, passwordText: passwordTextField.text!)
+        signInUser(emailText: emailTextField.text!, passwordText: passwordTextField.text!)
     }
     
     func signInUser(emailText: String, passwordText: String){

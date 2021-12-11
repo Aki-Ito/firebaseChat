@@ -18,6 +18,7 @@ class chatViewController: UIViewController {
     
     let db = Firebase.Firestore.firestore()
     let user = Auth.auth().currentUser
+    let storageRef = Storage.storage().reference(forURL: "gs://fir-chat-f0685.appspot.com")
     var sentGroupId: String = ""
     //    var messages: [String] = []
     var addresses: [[String : Any]] = []
@@ -57,7 +58,7 @@ class chatViewController: UIViewController {
         db.collection("groups")
             .document(sentGroupId)
             .collection("messages")
-            .order(by: "time", descending: true)
+            .order(by: "time", descending: false)
             .addSnapshotListener{ (querySnapshot, error) in
                 guard let snapshot = querySnapshot else {
                     return
@@ -133,13 +134,19 @@ extension chatViewController: UITableViewDelegate, UITableViewDataSource{
         
         
         let text = addresses[indexPath.row]["chatContent"] as! String
+        
         let chatUid: String = addresses[indexPath.row]["userUid"] as! String
         let myUid: String = user!.uid
         if chatUid == myUid{
             cell.myMessageText = text
+            cell.classmateImageView.image = nil
         } else {
             cell.classmateMessageText = text
+            let reference = storageRef.child("userProfile").child("\(chatUid).jpg")
+            cell.classmateImageView.sd_setImage(with: reference)
         }
+        
+        
         print("chatUid: \(chatUid)")
         print("uid: \(myUid)")
         return cell

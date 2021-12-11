@@ -253,13 +253,13 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sfz-38-T0s">
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="88"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sye-S0-2U3">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sye-S0-2U3">
                                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="作成するユーザの名前" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1LI-Cl-gP9">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="メールアドレス" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1LI-Cl-gP9">
                                                                 <rect key="frame" x="0.0" y="20.5" width="300" height="67.5"/>
                                                                 <color key="backgroundColor" red="0.87058823529999996" green="0.90867149430000005" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -337,8 +337,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="XEZ-N5-wBD"/>
                     <connections>
+                        <outlet property="emailTextField" destination="1LI-Cl-gP9" id="xJZ-Ys-UGy"/>
                         <outlet property="passwordTextField" destination="fh8-dl-gw4" id="XkX-sQ-O3S"/>
-                        <outlet property="userNameTextField" destination="1LI-Cl-gP9" id="xJZ-Ys-UGy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -522,7 +522,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4dy-7I-qay">
-                                <rect key="frame" x="0.0" y="88" width="414" height="676"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="708"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -530,8 +530,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="4dy-7I-qay" firstAttribute="top" secondItem="Tcp-iM-CPK" secondAttribute="top" id="03Y-PE-5wO"/>
-                            <constraint firstItem="Tcp-iM-CPK" firstAttribute="bottom" secondItem="4dy-7I-qay" secondAttribute="bottom" id="575-02-7c5"/>
-                            <constraint firstItem="4dy-7I-qay" firstAttribute="leading" secondItem="Tcp-iM-CPK" secondAttribute="leading" id="el9-QA-rDA"/>
+                            <constraint firstItem="4dy-7I-qay" firstAttribute="leading" secondItem="Tcp-iM-CPK" secondAttribute="leading" id="LEB-Re-fto"/>
+                            <constraint firstAttribute="bottom" secondItem="4dy-7I-qay" secondAttribute="bottom" constant="100" id="qMU-6M-HpR"/>
                             <constraint firstItem="Tcp-iM-CPK" firstAttribute="trailing" secondItem="4dy-7I-qay" secondAttribute="trailing" id="xq2-S1-Oc8"/>
                         </constraints>
                     </view>

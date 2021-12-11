@@ -92,6 +92,7 @@ class makeUserViewController: UIViewController {
     func transition(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let tabView = storyboard.instantiateViewController(withIdentifier: "tab") as! UITabBarController
+        tabView.modalPresentationStyle = .fullScreen
         tabView.selectedIndex = 0
         self.present(tabView, animated: true, completion: nil)
     }
