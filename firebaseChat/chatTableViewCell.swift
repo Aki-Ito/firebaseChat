@@ -53,8 +53,6 @@ class chatTableViewCell: UITableViewCell {
     
     func updateUI(){
         classmateImageView.layer.cornerRadius = 30
-//        classmateImageView.layer.borderColor = UIColor.lightGray.cgColor
-//        classmateImageView.layer.borderWidth = 1
         classmateImageView.layer.masksToBounds = true
         classmateTextView.layer.cornerRadius = 16
         //textViewのtextの長さに応じてセルの高さが決まるように設定したい。

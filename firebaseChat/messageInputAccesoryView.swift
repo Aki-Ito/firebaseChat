@@ -72,6 +72,7 @@ class messageInputAccesoryView: UIView{
         guard let text = messageTextView.text else { return }
         
         delegate?.tappedButton(text: text)
+        
     }
     
     

@@ -345,21 +345,114 @@
             </objects>
             <point key="canvasLocation" x="1677" y="-628"/>
         </scene>
-        <!--Item-->
-        <scene sceneID="Bym-RH-sLQ">
+        <!--Make Task View Controller-->
+        <scene sceneID="DX2-B8-iCK">
             <objects>
-                <viewController id="I4k-gJ-LAI" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8fR-U3-SYg">
+                <viewController id="lLw-5J-qYC" customClass="makeTaskViewController" customModule="firebaseChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hfd-hV-d2P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="ItG-kf-I5V"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Boc-Mm-v5K">
+                                <rect key="frame" x="-3" y="232" width="420" height="86"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="420" id="1yJ-e5-GYq"/>
+                                    <constraint firstAttribute="height" constant="86" id="cax-DP-rbi"/>
+                                </constraints>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7q-7W-fbc">
+                                <rect key="frame" x="107" y="654" width="200" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="ej1-4c-Auo"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="pick color"/>
+                                <connections>
+                                    <action selector="tappedColor:" destination="lLw-5J-qYC" eventType="touchUpInside" id="nO3-lo-MMM"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="d2b-a3-r4H">
+                                <rect key="frame" x="27" y="358" width="360" height="256"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="360" id="1i9-Bt-RsF"/>
+                                    <constraint firstAttribute="height" constant="256" id="d1u-d7-A0L"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ruI-NQ-Dh7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="k7q-7W-fbc" firstAttribute="centerX" secondItem="hfd-hV-d2P" secondAttribute="centerX" id="28j-nC-qF4"/>
+                            <constraint firstItem="Boc-Mm-v5K" firstAttribute="top" secondItem="ruI-NQ-Dh7" secondAttribute="top" constant="144" id="2ow-xb-aN6"/>
+                            <constraint firstItem="d2b-a3-r4H" firstAttribute="top" secondItem="Boc-Mm-v5K" secondAttribute="bottom" constant="40" id="W6v-0A-qwa"/>
+                            <constraint firstItem="d2b-a3-r4H" firstAttribute="centerX" secondItem="hfd-hV-d2P" secondAttribute="centerX" id="W9M-wT-H6P"/>
+                            <constraint firstItem="k7q-7W-fbc" firstAttribute="top" secondItem="d2b-a3-r4H" secondAttribute="bottom" constant="40" id="nF0-NJ-CaH"/>
+                            <constraint firstItem="Boc-Mm-v5K" firstAttribute="centerX" secondItem="hfd-hV-d2P" secondAttribute="centerX" id="qnw-vr-Xuh"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="VUL-Hx-yPa"/>
+                    <navigationItem key="navigationItem" id="7fB-ZR-y89">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="hOu-Xi-LyA">
+                            <connections>
+                                <action selector="tappedSaveButton:" destination="lLw-5J-qYC" id="b2M-Kc-B1P"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="Boc-Mm-v5K" id="P08-h4-JLt"/>
+                        <outlet property="textView" destination="d2b-a3-r4H" id="vA7-O1-mAF"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VBy-0s-hyU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bv3-Xa-EqN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2587" y="-581"/>
+            <point key="canvasLocation" x="4405.7971014492759" y="-589.28571428571422"/>
+        </scene>
+        <!--My Task View Controller-->
+        <scene sceneID="crz-IS-TgL">
+            <objects>
+                <viewController id="J14-fm-OEP" customClass="myTaskViewController" customModule="firebaseChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VP5-Wf-Kot">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="l0R-JD-6ek">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HR1-tD-ybW">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ICF-KP-e7G"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="l0R-JD-6ek" firstAttribute="leading" secondItem="ICF-KP-e7G" secondAttribute="leading" id="EAj-pt-L3J"/>
+                            <constraint firstItem="ICF-KP-e7G" firstAttribute="trailing" secondItem="l0R-JD-6ek" secondAttribute="trailing" id="WJ6-9G-qXs"/>
+                            <constraint firstItem="ICF-KP-e7G" firstAttribute="bottom" secondItem="l0R-JD-6ek" secondAttribute="bottom" id="hEI-Cz-r9O"/>
+                            <constraint firstItem="l0R-JD-6ek" firstAttribute="top" secondItem="ICF-KP-e7G" secondAttribute="top" id="wgt-It-K0j"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="04G-Ip-NrD">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="mT0-8A-wqv">
+                            <connections>
+                                <segue destination="lLw-5J-qYC" kind="show" id="cp1-D1-i0E"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="OuterCollectionView" destination="l0R-JD-6ek" id="W2T-S0-99K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qm0-yf-Bkr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3497.1014492753625" y="-589.28571428571422"/>
         </scene>
         <!--Make Room View Controller-->
         <scene sceneID="EsY-bW-wSn">
@@ -557,7 +650,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="sMx-Rn-rns" kind="relationship" relationship="viewControllers" id="hMW-JX-UZt"/>
-                        <segue destination="I4k-gJ-LAI" kind="relationship" relationship="viewControllers" id="wdk-WR-H1D"/>
+                        <segue destination="5tt-5b-VZv" kind="relationship" relationship="viewControllers" id="db5-2V-285"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="exw-BH-gLO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -583,8 +676,30 @@
             </objects>
             <point key="canvasLocation" x="2586.9565217391305" y="87.723214285714278"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="prK-wn-Fy0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5tt-5b-VZv" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="NFm-fo-hO0"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MxK-CH-vWS">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="J14-fm-OEP" kind="relationship" relationship="rootViewController" id="D8x-2I-h8A"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gzl-aP-9Is" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2586.9565217391305" y="-589.28571428571422"/>
+        </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
