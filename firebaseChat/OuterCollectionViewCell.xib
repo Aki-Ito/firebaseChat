@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Xx1-gu-Jxg">
-                        <rect key="frame" x="0.0" y="20" width="320" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EWb-O2-WoL">
                             <size key="itemSize" width="128" height="128"/>
@@ -42,7 +42,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Xx1-gu-Jxg" secondAttribute="bottom" id="0rL-s9-lqU"/>
-                <constraint firstItem="Xx1-gu-Jxg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="Ker-eK-Ope"/>
+                <constraint firstItem="Xx1-gu-Jxg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Ker-eK-Ope"/>
                 <constraint firstItem="Xx1-gu-Jxg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="QxB-Yn-2Pg"/>
                 <constraint firstItem="XTA-rf-Sen" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Rgv-08-JDb"/>
                 <constraint firstItem="XTA-rf-Sen" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="arx-0c-i6o"/>

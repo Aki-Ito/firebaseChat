@@ -14,7 +14,6 @@ class OuterCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var InnerCollectionView: UICollectionView!
     @IBOutlet weak var dateLabel: UILabel!
-    var viewHeight: CGFloat!
     
     let db = Firestore.firestore()
     let user = Auth.auth().currentUser
@@ -82,10 +81,7 @@ extension OuterCollectionViewCell: UICollectionViewDelegate, UICollectionViewDat
         let rgbGreen = addresses[indexPath.row]["green"] as! CGFloat
         let alpha = addresses[indexPath.row]["alpha"] as! CGFloat
         
-        print(rgbRed)
-        print(rgbBlue)
-        print(rgbGreen)
-        print(alpha)
+        
         cell.backgroundColor = UIColor(red: rgbRed, green: rgbGreen, blue: rgbBlue, alpha: alpha)
         cell.contentLabel.text = addresses[indexPath.row]["content"] as? String
         return cell
@@ -96,17 +92,16 @@ extension OuterCollectionViewCell: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 50, height: 50)
+        return CGSize(width: 80, height: 80)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//
-//        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-//        let cellWidth = flowLayout.itemSize.width
-//        let cellHeight = flowLayout.itemSize.height
-//
-//
-//        return UIEdgeInsets(top: (view.frame.width - cellHeight)/2, left: <#T##CGFloat#>, bottom: <#T##CGFloat#>, right: <#T##CGFloat#>)
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+
+        return UIEdgeInsets(top: 16, left: 12, bottom: 8, right: 12)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 24
+    }
     
 }

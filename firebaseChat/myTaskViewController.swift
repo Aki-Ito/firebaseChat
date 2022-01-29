@@ -6,15 +6,11 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
-import Firebase
 
 class myTaskViewController: UIViewController {
     
     @IBOutlet weak var OuterCollectionView: UICollectionView!
 
-    var addresses = [String]()
     var timeArray = [String]()
     let userDefaults = UserDefaults.standard
     

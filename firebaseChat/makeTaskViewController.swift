@@ -33,6 +33,7 @@ class makeTaskViewController: UIViewController {
         datePicker.datePickerMode = .dateAndTime
         
         uiImage()
+        
         if userDefaults.object(forKey: "time") != nil{
             timeArray = userDefaults.object(forKey: "time") as! [String]
         }
@@ -45,15 +46,21 @@ class makeTaskViewController: UIViewController {
     }
     
     @IBAction func tappedSaveButton(_ sender: Any) {
-        
-        guard let user = user else {return}
+        updateFirestore()
+    }
+    
+    func updateFirestore(){
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy年MM月dd日"
         let time = formatter.string(from: datePicker.date)
-        
         timeArray.append(time)
+        let orderedSet: NSOrderedSet = NSOrderedSet(array: timeArray)
+        timeArray = orderedSet.array as! [String]
+        
         userDefaults.set(timeArray, forKey: "time")
+        
+        guard let user = user else {return}
         
         let addData: [String: Any] = [
             "time": Timestamp(date: datePicker.date),
@@ -69,6 +76,7 @@ class makeTaskViewController: UIViewController {
             .collection(time)
             .addDocument(data: addData)
     }
+    
     func showColorPicker() {
         if #available(iOS 14.0, *) {
             let colorPicker = UIColorPickerViewController()

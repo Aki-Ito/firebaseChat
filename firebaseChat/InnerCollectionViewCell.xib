@@ -33,7 +33,7 @@
             <connections>
                 <outlet property="contentLabel" destination="Akw-BQ-HT2" id="qLd-3c-FOt"/>
             </connections>
-            <point key="canvasLocation" x="139" y="101"/>
+            <point key="canvasLocation" x="33" y="34"/>
         </collectionViewCell>
     </objects>
 </document>
