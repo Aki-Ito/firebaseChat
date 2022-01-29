@@ -99,14 +99,14 @@ extension OuterCollectionViewCell: UICollectionViewDelegate, UICollectionViewDat
         return CGSize(width: 50, height: 50)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-        let cellWidth = flowLayout.itemSize.width
-        let cellHeight = flowLayout.itemSize.height
-        
-        
-        return UIEdgeInsets(top: (view.frame.width - cellHeight)/2, left: <#T##CGFloat#>, bottom: <#T##CGFloat#>, right: <#T##CGFloat#>)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//
+//        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+//        let cellWidth = flowLayout.itemSize.width
+//        let cellHeight = flowLayout.itemSize.height
+//
+//
+//        return UIEdgeInsets(top: (view.frame.width - cellHeight)/2, left: <#T##CGFloat#>, bottom: <#T##CGFloat#>, right: <#T##CGFloat#>)
+//    }
     
 }
