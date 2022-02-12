@@ -53,17 +53,18 @@ class makeTaskViewController: UIViewController {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy年MM月dd日"
-        let time = formatter.string(from: datePicker.date)
-        timeArray.append(time)
-        let orderedSet: NSOrderedSet = NSOrderedSet(array: timeArray)
-        timeArray = orderedSet.array as! [String]
-        
-        userDefaults.set(timeArray, forKey: "time")
+        let dateAndTime = formatter.string(from: datePicker.date)
+//        timeArray.append(dateAndTime)
+//        let orderedSet: NSOrderedSet = NSOrderedSet(array: timeArray)
+//        timeArray = orderedSet.array as! [String]
+//
+//        userDefaults.set(timeArray, forKey: "time")
         
         guard let user = user else {return}
         
         let addData: [String: Any] = [
             "time": Timestamp(date: datePicker.date),
+            "date": dateAndTime,
             "content": textView.text!,
             "red": rgbRed,
             "blue": rgbBlue,
@@ -71,9 +72,16 @@ class makeTaskViewController: UIViewController {
             "alpha": alpha
         ]
         
+//        let addDayData: [String: Any] = [
+//            "date": dateAndTime
+//        ]
+//
+//        db.collection("days")
+//            .addDocument(data: addDayData)
+        
         db.collection("users")
             .document(user.uid)
-            .collection(time)
+            .collection("tasks")
             .addDocument(data: addData)
     }
     

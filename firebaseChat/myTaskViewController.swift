@@ -6,12 +6,18 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 class myTaskViewController: UIViewController {
     
     @IBOutlet weak var OuterCollectionView: UICollectionView!
 
+    let db = Firestore.firestore()
+    let user = Auth.auth().currentUser
     var timeArray = [String]()
+    var addresses: [[String : Any]] = []
     let userDefaults = UserDefaults.standard
     
     var viewWidth: CGFloat = 0.0
@@ -25,18 +31,61 @@ class myTaskViewController: UIViewController {
         
         OuterCollectionView.register(UINib(nibName: "OuterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "OuterCell")
         
+        guard let user = user else {return}
+        
+        db.collection("users")
+            .document(user.uid)
+            .collection("tasks")
+            .order(by: "time", descending: false)
+            .addSnapshotListener{QuerySnapshot, Error in
+                guard let querySnapshot = QuerySnapshot else {return}
+                
+                self.addresses.removeAll()
+                for doc in querySnapshot.documents{
+                    
+                    let timeStamp = doc.data()["time"] as! Timestamp
+                    let date = doc.data()["date"] as! String
+                    let content = doc.data()["content"] as! String
+                    let rgbRed = doc.data()["red"] as! CGFloat
+                    let rgbBlue = doc.data()["blue"] as! CGFloat
+                    let rgbGreen = doc.data()["green"] as! CGFloat
+                    let alpha = doc.data()["alpha"] as! CGFloat
+                    
+                    let time: Date = timeStamp.dateValue()
+                    
+                    self.timeArray.append(date)
+                    let orderedSet: NSOrderedSet = NSOrderedSet(array: self.timeArray)
+                    self.timeArray = orderedSet.array as! [String]
+                  
+                    self.addresses.append(
+                        ["date": date,
+                         "time": time,
+                         "content": content,
+                         "red": rgbRed,
+                         "blue": rgbBlue,
+                         "green": rgbGreen,
+                         "alpha": alpha]
+                    )
+                }
+                
+            }
+        
+        
+        
+        self.OuterCollectionView.reloadData()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if userDefaults.object(forKey: "time") != nil{
-            timeArray = userDefaults.object(forKey: "time") as! [String]
-            print(timeArray)
-        }
+//        if userDefaults.object(forKey: "time") != nil{
+//            timeArray = userDefaults.object(forKey: "time") as! [String]
+//            print(timeArray)
+//        }
         
         self.OuterCollectionView.reloadData()
+        
         
     }
     
@@ -65,7 +114,7 @@ extension myTaskViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.layer.masksToBounds = false
         
         cell.dateLabel.text = timeArray[indexPath.row]
-        cell.configureCell(collectionName: timeArray[indexPath.row])
+        cell.configureCell(contentArray: addresses, date: timeArray[indexPath.row])
         
         return cell
     }
