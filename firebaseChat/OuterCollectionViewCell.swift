@@ -27,44 +27,14 @@ class OuterCollectionViewCell: UICollectionViewCell {
         InnerCollectionView.collectionViewLayout = layout
         InnerCollectionView.delegate = self
         InnerCollectionView.dataSource = self
+        InnerCollectionView.allowsSelection = false
+        InnerCollectionView.isUserInteractionEnabled = false
         InnerCollectionView.register(UINib(nibName: "InnerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "InnerCell")
         
     }
     
     func configureCell(contentArray: [[String : Any]], date: String){
         
-//        guard let user = user else {return}
-//
-//        db.collection("users")
-//            .document(user.uid)
-//            .collection(collectionName)
-//            .addSnapshotListener { QuerySnapshot, Error in
-//
-//                guard let snapshot = QuerySnapshot else {return}
-//
-//                self.addresses.removeAll()
-//                for doc in snapshot.documents{
-//
-//                    let timeStamp = doc.data()["time"] as! Timestamp
-//                    let content = doc.data()["content"] as! String
-//                    let rgbRed = doc.data()["red"] as! CGFloat
-//                    let rgbBlue = doc.data()["blue"] as! CGFloat
-//                    let rgbGreen = doc.data()["green"] as! CGFloat
-//                    let alpha = doc.data()["alpha"] as! CGFloat
-//
-//                    let date: Date = timeStamp.dateValue()
-//
-//                    self.addresses.append(
-//                        ["time": date,
-//                         "content": content,
-//                         "red": rgbRed,
-//                         "blue": rgbBlue,
-//                         "green": rgbGreen,
-//                         "alpha": alpha]
-//                    )
-//                }
-        
-       
         taskArray.removeAll()
         for content in contentArray{
             let contentDate = content["date"] as! String
@@ -73,12 +43,9 @@ class OuterCollectionViewCell: UICollectionViewCell {
                 print(taskArray)
             }
         }
-            
+        self.InnerCollectionView.reloadData()
         
-                
-                self.InnerCollectionView.reloadData()
-                
-            }
+    }
     
     
 }
@@ -108,7 +75,7 @@ extension OuterCollectionViewCell: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-
+        
         return UIEdgeInsets(top: 16, left: 12, bottom: 8, right: 12)
     }
     

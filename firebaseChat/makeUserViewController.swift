@@ -23,9 +23,15 @@ class makeUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        skipLogin()
+    }
+    
+    
     
     @IBAction func tappedProfileButton(_ sender: Any) {
         let imagePickerController = UIImagePickerController()
@@ -85,6 +91,15 @@ class makeUserViewController: UIViewController {
             
             self.transition()
             
+        }
+        
+    }
+    
+    func skipLogin(){
+        let user = Auth.auth().currentUser
+        if let user = user {
+            print("account: \(user)")
+            self.transition()
         }
         
     }

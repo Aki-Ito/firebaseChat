@@ -25,10 +25,12 @@
 		2C5FEE8A273ED97100927E20 /* firebaseChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5FEE89273ED97100927E20 /* firebaseChatUITests.swift */; };
 		2C5FEE8C273ED97100927E20 /* firebaseChatUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5FEE8B273ED97100927E20 /* firebaseChatUITestsLaunchTests.swift */; };
 		2C5FEE99273EDB6500927E20 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C5FEE98273EDB6500927E20 /* GoogleService-Info.plist */; };
+		2C6AAA6827B801D800769424 /* DailyTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AAA6727B801D800769424 /* DailyTasksViewController.swift */; };
 		2C70C175274DFDE200FDF55A /* chatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C70C173274DFDE200FDF55A /* chatTableViewCell.swift */; };
 		2C70C176274DFDE200FDF55A /* chatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C70C174274DFDE200FDF55A /* chatTableViewCell.xib */; };
 		2C70C178274F7BB400FDF55A /* inputAccesoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C70C177274F7BB400FDF55A /* inputAccesoryView.xib */; };
 		2C70C17A274F80A800FDF55A /* messageInputAccesoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C70C179274F80A800FDF55A /* messageInputAccesoryView.swift */; };
+		2C71DF7427B7D5AF00D887BC /* authStateManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C71DF7327B7D5AF00D887BC /* authStateManagement.swift */; };
 		2CA52A1A27A4E51E007C4016 /* makeTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA52A1927A4E51E007C4016 /* makeTaskViewController.swift */; };
 		2CA52A1C27A53855007C4016 /* myTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA52A1B27A53855007C4016 /* myTaskViewController.swift */; };
 		2CA52A1F27A53B60007C4016 /* OuterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA52A1D27A53B60007C4016 /* OuterCollectionViewCell.swift */; };
@@ -79,10 +81,12 @@
 		2C5FEE89273ED97100927E20 /* firebaseChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firebaseChatUITests.swift; sourceTree = "<group>"; };
 		2C5FEE8B273ED97100927E20 /* firebaseChatUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firebaseChatUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2C5FEE98273EDB6500927E20 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2C6AAA6727B801D800769424 /* DailyTasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTasksViewController.swift; sourceTree = "<group>"; };
 		2C70C173274DFDE200FDF55A /* chatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatTableViewCell.swift; sourceTree = "<group>"; };
 		2C70C174274DFDE200FDF55A /* chatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = chatTableViewCell.xib; sourceTree = "<group>"; };
 		2C70C177274F7BB400FDF55A /* inputAccesoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = inputAccesoryView.xib; sourceTree = "<group>"; };
 		2C70C179274F80A800FDF55A /* messageInputAccesoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageInputAccesoryView.swift; sourceTree = "<group>"; };
+		2C71DF7327B7D5AF00D887BC /* authStateManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authStateManagement.swift; sourceTree = "<group>"; };
 		2CA52A1927A4E51E007C4016 /* makeTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makeTaskViewController.swift; sourceTree = "<group>"; };
 		2CA52A1B27A53855007C4016 /* myTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myTaskViewController.swift; sourceTree = "<group>"; };
 		2CA52A1D27A53B60007C4016 /* OuterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OuterCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -190,6 +194,8 @@
 				2CA52A1E27A53B60007C4016 /* OuterCollectionViewCell.xib */,
 				2CA52A2127A5434D007C4016 /* InnerCollectionViewCell.swift */,
 				2CA52A2227A5434D007C4016 /* InnerCollectionViewCell.xib */,
+				2C71DF7327B7D5AF00D887BC /* authStateManagement.swift */,
+				2C6AAA6727B801D800769424 /* DailyTasksViewController.swift */,
 			);
 			path = firebaseChat;
 			sourceTree = "<group>";
@@ -466,10 +472,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C6AAA6827B801D800769424 /* DailyTasksViewController.swift in Sources */,
 				2C5FEE6D273ED96E00927E20 /* ViewController.swift in Sources */,
 				2C58B4B0273EE5C100846D53 /* makeRoomViewController.swift in Sources */,
 				2C5FEE69273ED96E00927E20 /* AppDelegate.swift in Sources */,
 				2CA52A1A27A4E51E007C4016 /* makeTaskViewController.swift in Sources */,
+				2C71DF7427B7D5AF00D887BC /* authStateManagement.swift in Sources */,
 				2C58B4F827464AC100846D53 /* makeUserViewController.swift in Sources */,
 				2C5FEE6B273ED96E00927E20 /* SceneDelegate.swift in Sources */,
 				2C70C175274DFDE200FDF55A /* chatTableViewCell.swift in Sources */,

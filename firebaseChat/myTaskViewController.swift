@@ -18,9 +18,11 @@ class myTaskViewController: UIViewController {
     let user = Auth.auth().currentUser
     var timeArray = [String]()
     var addresses: [[String : Any]] = []
-    let userDefaults = UserDefaults.standard
+    var date = String()
     
     var viewWidth: CGFloat = 0.0
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +32,8 @@ class myTaskViewController: UIViewController {
         OuterCollectionView.dataSource = self
         
         OuterCollectionView.register(UINib(nibName: "OuterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "OuterCell")
+        OuterCollectionView.allowsSelection = true
+        OuterCollectionView.isUserInteractionEnabled = true
         
         guard let user = user else {return}
         
@@ -64,7 +68,8 @@ class myTaskViewController: UIViewController {
                          "red": rgbRed,
                          "blue": rgbBlue,
                          "green": rgbGreen,
-                         "alpha": alpha]
+                         "alpha": alpha,
+                         "documentID": doc.documentID]
                     )
                 }
                 
@@ -90,15 +95,18 @@ class myTaskViewController: UIViewController {
     }
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDailyTasks"{
+            let vc = segue.destination as! DailyTasksViewController
+            vc.addresses = self.addresses
+            vc.date = self.date
+        }
+    }
+    
+    
+    @IBAction func tappedAddButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "toMakeTask", sender: nil)
+    }
     
 }
 
@@ -129,5 +137,11 @@ extension myTaskViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let cellWidth: CGFloat = viewWidth - space
         let cellHeight: CGFloat = 160
         return CGSize(width: cellWidth, height: cellHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("tapped")
+        date = timeArray[indexPath.row]
+        self.performSegue(withIdentifier: "toDailyTasks", sender: nil)
     }
 }

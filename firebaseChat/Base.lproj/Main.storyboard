@@ -12,7 +12,7 @@
         <!--Make User View Controller-->
         <scene sceneID="ac5-1I-OBl">
             <objects>
-                <viewController id="qv3-He-CdR" customClass="makeUserViewController" customModule="firebaseChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="makeUser" id="qv3-He-CdR" customClass="makeUserViewController" customModule="firebaseChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uWG-oM-Xct">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -345,6 +345,44 @@
             </objects>
             <point key="canvasLocation" x="1677" y="-628"/>
         </scene>
+        <!--Daily Tasks View Controller-->
+        <scene sceneID="Xtx-jq-sSz">
+            <objects>
+                <viewController id="2Vh-x1-L27" customClass="DailyTasksViewController" customModule="firebaseChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8uJ-jI-YZx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pFy-C0-GcZ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RSe-s5-Jyj">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2FD-lf-JHD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pFy-C0-GcZ" firstAttribute="leading" secondItem="2FD-lf-JHD" secondAttribute="leading" id="08Z-1g-47f"/>
+                            <constraint firstItem="2FD-lf-JHD" firstAttribute="trailing" secondItem="pFy-C0-GcZ" secondAttribute="trailing" id="90n-hA-MWv"/>
+                            <constraint firstItem="2FD-lf-JHD" firstAttribute="bottom" secondItem="pFy-C0-GcZ" secondAttribute="bottom" id="B98-xa-Qat"/>
+                            <constraint firstItem="pFy-C0-GcZ" firstAttribute="top" secondItem="2FD-lf-JHD" secondAttribute="top" id="md7-ji-k9p"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="OZY-7o-zCd"/>
+                    <connections>
+                        <outlet property="collectionView" destination="pFy-C0-GcZ" id="hTg-9r-Hge"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u36-9l-MRb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4406" y="-1272"/>
+        </scene>
         <!--Make Task View Controller-->
         <scene sceneID="DX2-B8-iCK">
             <objects>
@@ -418,10 +456,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="l0R-JD-6ek">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UWS-9H-2qB">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HR1-tD-ybW">
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tPo-7i-nhc">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -433,21 +471,23 @@
                         <viewLayoutGuide key="safeArea" id="ICF-KP-e7G"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="l0R-JD-6ek" firstAttribute="leading" secondItem="ICF-KP-e7G" secondAttribute="leading" id="EAj-pt-L3J"/>
-                            <constraint firstItem="ICF-KP-e7G" firstAttribute="trailing" secondItem="l0R-JD-6ek" secondAttribute="trailing" id="WJ6-9G-qXs"/>
-                            <constraint firstItem="ICF-KP-e7G" firstAttribute="bottom" secondItem="l0R-JD-6ek" secondAttribute="bottom" id="hEI-Cz-r9O"/>
-                            <constraint firstItem="l0R-JD-6ek" firstAttribute="top" secondItem="ICF-KP-e7G" secondAttribute="top" id="wgt-It-K0j"/>
+                            <constraint firstItem="UWS-9H-2qB" firstAttribute="top" secondItem="ICF-KP-e7G" secondAttribute="top" id="4v6-FG-j47"/>
+                            <constraint firstItem="ICF-KP-e7G" firstAttribute="trailing" secondItem="UWS-9H-2qB" secondAttribute="trailing" id="WUF-SP-C4A"/>
+                            <constraint firstItem="ICF-KP-e7G" firstAttribute="bottom" secondItem="UWS-9H-2qB" secondAttribute="bottom" id="mYd-7J-6lT"/>
+                            <constraint firstItem="UWS-9H-2qB" firstAttribute="leading" secondItem="ICF-KP-e7G" secondAttribute="leading" id="swI-IB-7iY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="04G-Ip-NrD">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="mT0-8A-wqv">
                             <connections>
-                                <segue destination="lLw-5J-qYC" kind="show" id="cp1-D1-i0E"/>
+                                <action selector="tappedAddButton:" destination="J14-fm-OEP" id="yrk-HZ-Wgg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="OuterCollectionView" destination="l0R-JD-6ek" id="W2T-S0-99K"/>
+                        <outlet property="OuterCollectionView" destination="UWS-9H-2qB" id="qdQ-bI-lJV"/>
+                        <segue destination="2Vh-x1-L27" kind="show" identifier="toDailyTasks" id="Wvg-iW-XRO"/>
+                        <segue destination="lLw-5J-qYC" kind="show" identifier="toMakeTask" id="brB-Z8-OhM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qm0-yf-Bkr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
