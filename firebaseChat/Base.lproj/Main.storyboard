@@ -374,7 +374,13 @@
                             <constraint firstItem="pFy-C0-GcZ" firstAttribute="top" secondItem="2FD-lf-JHD" secondAttribute="top" id="md7-ji-k9p"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="OZY-7o-zCd"/>
+                    <navigationItem key="navigationItem" id="OZY-7o-zCd">
+                        <barButtonItem key="rightBarButtonItem" title="switch" id="EFl-nb-Igx">
+                            <connections>
+                                <action selector="switchButton:" destination="2Vh-x1-L27" id="ykI-TQ-YTl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="pFy-C0-GcZ" id="hTg-9r-Hge"/>
                     </connections>

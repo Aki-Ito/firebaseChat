@@ -70,7 +70,7 @@ class messageInputAccesoryView: UIView{
     
     @IBAction func tappedSendMessageButton(_ sender: Any) {
         guard let text = messageTextView.text else { return }
-        
+        print(delegate)
         delegate?.tappedButton(text: text)
         
     }

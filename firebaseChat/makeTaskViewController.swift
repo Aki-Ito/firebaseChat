@@ -69,7 +69,8 @@ class makeTaskViewController: UIViewController {
             "red": rgbRed,
             "blue": rgbBlue,
             "green": rgbGreen,
-            "alpha": alpha
+            "alpha": alpha,
+            "isComplete": false
         ]
         
 //        let addDayData: [String: Any] = [

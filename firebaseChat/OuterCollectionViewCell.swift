@@ -10,6 +10,10 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
+protocol OuterCollectionViewCellDelegate: AnyObject{
+    func tappedCell(date: String)
+}
+
 class OuterCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var InnerCollectionView: UICollectionView!
@@ -18,6 +22,8 @@ class OuterCollectionViewCell: UICollectionViewCell {
     let db = Firestore.firestore()
     let user = Auth.auth().currentUser
     var taskArray: [[String : Any]] = []
+    var date: String = ""
+    weak var delegate : OuterCollectionViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,8 +33,10 @@ class OuterCollectionViewCell: UICollectionViewCell {
         InnerCollectionView.collectionViewLayout = layout
         InnerCollectionView.delegate = self
         InnerCollectionView.dataSource = self
-        InnerCollectionView.allowsSelection = false
-        InnerCollectionView.isUserInteractionEnabled = false
+        InnerCollectionView.layer.cornerRadius = 12.0
+//        InnerCollectionView.layer.masksToBounds = false
+//        InnerCollectionView.isUserInteractionEnabled = false
+//        InnerCollectionView.isScrollEnabled = true
         InnerCollectionView.register(UINib(nibName: "InnerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "InnerCell")
         
     }
@@ -36,6 +44,7 @@ class OuterCollectionViewCell: UICollectionViewCell {
     func configureCell(contentArray: [[String : Any]], date: String){
         
         taskArray.removeAll()
+        self.date = date
         for content in contentArray{
             let contentDate = content["date"] as! String
             if contentDate == date{
@@ -45,6 +54,16 @@ class OuterCollectionViewCell: UICollectionViewCell {
         }
         self.InnerCollectionView.reloadData()
         
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        for touch in touches{
+            if touch.view?.tag == 1{
+                delegate?.tappedCell(date: self.date)
+            }
+        }
     }
     
     
@@ -81,6 +100,11 @@ extension OuterCollectionViewCell: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 24
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("tapped")
+        delegate?.tappedCell(date: self.date)
     }
     
 }

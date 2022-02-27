@@ -25,7 +25,17 @@ class myTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        print("---画面B:\(#function)")
+        self.OuterCollectionView.reloadData()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        presentingViewController?.beginAppearanceTransition(false, animated: animated)
+        super.viewWillAppear(animated)
+        
+        print("---画面B:\(#function)")
         // Do any additional setup after loading the view.
         viewWidth = view.frame.width
         OuterCollectionView.delegate = self
@@ -46,7 +56,7 @@ class myTaskViewController: UIViewController {
                 
                 self.addresses.removeAll()
                 for doc in querySnapshot.documents{
-                    
+                    print("データ:\(doc)")
                     let timeStamp = doc.data()["time"] as! Timestamp
                     let date = doc.data()["date"] as! String
                     let content = doc.data()["content"] as! String
@@ -54,6 +64,7 @@ class myTaskViewController: UIViewController {
                     let rgbBlue = doc.data()["blue"] as! CGFloat
                     let rgbGreen = doc.data()["green"] as! CGFloat
                     let alpha = doc.data()["alpha"] as! CGFloat
+                    let isComplete = doc.data()["isComplete"] as! Bool
                     
                     let time: Date = timeStamp.dateValue()
                     
@@ -69,30 +80,28 @@ class myTaskViewController: UIViewController {
                          "blue": rgbBlue,
                          "green": rgbGreen,
                          "alpha": alpha,
-                         "documentID": doc.documentID]
+                         "documentID": doc.documentID,
+                         "isComplete": isComplete]
                     )
                 }
-                
+                self.OuterCollectionView.reloadData()
             }
-        
-        
-        
-        self.OuterCollectionView.reloadData()
+ 
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-//        if userDefaults.object(forKey: "time") != nil{
-//            timeArray = userDefaults.object(forKey: "time") as! [String]
-//            print(timeArray)
-//        }
-        
-        self.OuterCollectionView.reloadData()
-        
-        
-    }
+    override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            print("---画面B:\(#function)")
+        }
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            print("---画面B:\(#function)")
+        }
+        override func viewDidDisappear(_ animated: Bool) {
+            super.viewDidDisappear(animated)
+            print("---画面B:\(#function)")
+        }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -113,8 +122,10 @@ class myTaskViewController: UIViewController {
 extension myTaskViewController: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = OuterCollectionView.dequeueReusableCell(withReuseIdentifier: "OuterCell", for: indexPath) as! OuterCollectionViewCell
+        print("---画面B cellForItemAt:\(#function)")
         
+        let cell = OuterCollectionView.dequeueReusableCell(withReuseIdentifier: "OuterCell", for: indexPath) as! OuterCollectionViewCell
+        cell.delegate = self
         cell.layer.cornerRadius = 12 //角丸
         cell.layer.shadowOpacity = 0.25 //影の濃さ
         cell.layer.shadowColor = UIColor.black.cgColor //影の色
@@ -123,16 +134,17 @@ extension myTaskViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         cell.dateLabel.text = timeArray[indexPath.row]
         cell.configureCell(contentArray: addresses, date: timeArray[indexPath.row])
-        
+        print(cell.layer.cornerRadius)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("---画面B:\(#function)")
         return timeArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+        print("---画面B:\(#function)")
         let space: CGFloat = 36
         let cellWidth: CGFloat = viewWidth - space
         let cellHeight: CGFloat = 160
@@ -142,6 +154,14 @@ extension myTaskViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("tapped")
         date = timeArray[indexPath.row]
+        self.performSegue(withIdentifier: "toDailyTasks", sender: nil)
+    }
+}
+
+extension myTaskViewController: OuterCollectionViewCellDelegate{
+    func tappedCell(date: String) {
+        self.date = date
+        print("date: \(self.date)")
         self.performSegue(withIdentifier: "toDailyTasks", sender: nil)
     }
 }

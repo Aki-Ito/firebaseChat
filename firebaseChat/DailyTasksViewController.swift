@@ -11,23 +11,23 @@ import FirebaseFirestore
 import FirebaseAuth
 
 class DailyTasksViewController: UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     var addresses: [[String : Any]] = []
     var date = String()
     var taskArray: [[String : Any]] = []
+    var completeArray: [[String: Any]] = []
     
     let db = Firestore.firestore()
     let user = Auth.auth().currentUser
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal // 横スクロール
+        layout.estimatedItemSize = .zero
         collectionView.collectionViewLayout = layout
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -47,13 +47,17 @@ class DailyTasksViewController: UIViewController {
         taskArray.removeAll()
         for content in addresses{
             let contentDate = content["date"] as! String
-            if contentDate == date{
+            let isComplete = content["isComplete"] as! Bool
+            if contentDate == date && isComplete == false{
                 taskArray.append(content)
-                print(taskArray)
+            }else if contentDate == date || isComplete == true{
+                completeArray.append(content)
             }
         }
         collectionView.reloadData()
     }
+    
+    
 }
 
 extension DailyTasksViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -71,33 +75,78 @@ extension DailyTasksViewController: UICollectionViewDelegate, UICollectionViewDa
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 80, height: 80)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         taskArray.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedDocID = addresses[indexPath.row]["documentID"] as! String
-        guard let user = user else {return}
-        db.collection("users")
-            .document(user.uid)
-            .collection("tasks")
-            .document(selectedDocID)
-            .delete(){ err in
-                if let err = err {
-                        print("Error removing document: \(err)")
-                    } else {
-                        print("Document successfully removed!")
-                        self.taskArray.remove(at: indexPath.row)
-                        self.collectionView.reloadData()
-                        
-                        if self.taskArray.isEmpty{
-                            let preNC = self.navigationController!
-                            let preVC = preNC.viewControllers[preNC.viewControllers.count - 2] as!
-                            myTaskViewController
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        return UIEdgeInsets(top: 16, left: 12, bottom: 8, right: 12)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 24
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let actionProvider: ([UIMenuElement]) -> UIMenu? = { _ in
+            
+            //タイトルとイメージを設定できる。
+            
+                let complete = UIAction(title: "Complete", image: nil, identifier: UIAction.Identifier(rawValue: "complete")) { _ in
+                    // 押された際にアクションをする
+                    let selectedDocID = self.taskArray[indexPath.row]["documentID"] as! String
+                    self.taskArray[indexPath.row]["isComplete"] = true
+                    guard let user = self.user else {return}
+                    self.db.collection("users")
+                        .document(user.uid)
+                        .collection("tasks")
+                        .document(selectedDocID)
+                        .setData(self.taskArray[indexPath.row], merge: true)
+                    
+                    self.completeArray.append(self.taskArray[indexPath.row])
+                    self.taskArray.remove(at: indexPath.row)
+                
+            }
+            
+            
+            let delete = UIAction(title: "delete", image: UIImage(systemName: "trash"), identifier: UIAction.Identifier(rawValue: "delete")){ [self] _ in
+                
+                let selectedDocID = self.taskArray[indexPath.row]["documentID"] as! String
+                guard let user = self.user else {return}
+                self.db.collection("users")
+                    .document(user.uid)
+                    .collection("tasks")
+                    .document(selectedDocID)
+                    .delete(){ err in
+                        if let err = err {
+                            print("Error removing document: \(err)")
+                        } else {
+                            print("Document successfully removed!")
+                            self.taskArray.remove(at: indexPath.row)
+                            self.collectionView.reloadData()
                             
-                            preVC.timeArray.removeAll(where: {$0 == self.date})
+                            if self.taskArray.isEmpty{
+                                let preNC = self.navigationController!
+                                let preVC = preNC.viewControllers[preNC.viewControllers.count - 2] as! myTaskViewController
+                                
+                                preVC.timeArray.removeAll(where: {$0 == self.date})
+                            }
                         }
                     }
+                
             }
+            delete.attributes = [.destructive]
+            
+            return UIMenu(title: "menu", image: nil, identifier: nil, children: [complete, delete])
+        }
+        
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil,
+                                          actionProvider: actionProvider)
     }
 }
