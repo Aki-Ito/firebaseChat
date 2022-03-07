@@ -13,6 +13,7 @@ import FirebaseFirestore
 class myTaskViewController: UIViewController {
     
     @IBOutlet weak var OuterCollectionView: UICollectionView!
+    @IBOutlet weak var button: UIButton!
 
     let db = Firestore.firestore()
     let user = Auth.auth().currentUser
@@ -22,10 +23,37 @@ class myTaskViewController: UIViewController {
     
     var viewWidth: CGFloat = 0.0
     
+    var startingFrame : CGRect!
+        var endingFrame : CGRect!
+
+        func scrollViewDidScroll(_ scrollView: UIScrollView) {
+            if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) && self.button.isHidden {
+             self.button.isHidden = false
+             self.button.frame = startingFrame
+             UIView.animate(withDuration: 1.0) {
+              self.button.frame = self.endingFrame
+             }
+            }
+        }
+        func configureSizes() {
+            let screenSize = UIScreen.main.bounds
+            let screenWidth = screenSize.width
+            let screenHeight = screenSize.height
+
+            startingFrame = CGRect(x: 0, y: screenHeight+100, width: screenWidth, height: 100)
+            endingFrame = CGRect(x: 0, y: screenHeight-100, width: screenWidth, height: 100)
+
+        }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        button.layer.cornerRadius = 32
+        button.layer.shadowOpacity = 0.25 //影の濃さ
+        button.layer.shadowColor = UIColor.black.cgColor //影の色
+        button.layer.shadowOffset = CGSize(width: 2, height: 3) //影の方向
+        button.layer.masksToBounds = false
         print("---画面B:\(#function)")
         self.OuterCollectionView.reloadData()
         

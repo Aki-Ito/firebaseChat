@@ -41,9 +41,12 @@ class makeRoomViewController: UIViewController {
     
     
     @IBAction func tappedAddButton(_ sender: Any) {
-        let addData = [
+        
+        let emptyArray: [String] = []
+        let addData: [String : Any] = [
             "roomName": roomNameTextField.text!,
-            "roomNumber": roomNumberTextField.text!
+            "roomNumber": roomNumberTextField.text!,
+            "registeredUser": emptyArray
         ]
         
         

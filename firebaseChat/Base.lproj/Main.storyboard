@@ -473,13 +473,24 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NDt-L0-pEH">
+                                <rect key="frame" x="294" y="717" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="JzN-C6-iIm"/>
+                                    <constraint firstAttribute="height" constant="60" id="oEf-Ca-BNt"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ICF-KP-e7G"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="ICF-KP-e7G" firstAttribute="trailing" secondItem="NDt-L0-pEH" secondAttribute="trailing" constant="60" id="4iS-ar-iJH"/>
                             <constraint firstItem="UWS-9H-2qB" firstAttribute="top" secondItem="ICF-KP-e7G" secondAttribute="top" id="4v6-FG-j47"/>
                             <constraint firstItem="ICF-KP-e7G" firstAttribute="trailing" secondItem="UWS-9H-2qB" secondAttribute="trailing" id="WUF-SP-C4A"/>
                             <constraint firstItem="ICF-KP-e7G" firstAttribute="bottom" secondItem="UWS-9H-2qB" secondAttribute="bottom" id="mYd-7J-6lT"/>
+                            <constraint firstItem="ICF-KP-e7G" firstAttribute="bottom" secondItem="NDt-L0-pEH" secondAttribute="bottom" constant="36" id="nLq-EI-b9Y"/>
                             <constraint firstItem="UWS-9H-2qB" firstAttribute="leading" secondItem="ICF-KP-e7G" secondAttribute="leading" id="swI-IB-7iY"/>
                         </constraints>
                     </view>
@@ -492,6 +503,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="OuterCollectionView" destination="UWS-9H-2qB" id="qdQ-bI-lJV"/>
+                        <outlet property="button" destination="NDt-L0-pEH" id="PAP-VQ-AWn"/>
                         <segue destination="2Vh-x1-L27" kind="show" identifier="toDailyTasks" id="Wvg-iW-XRO"/>
                         <segue destination="lLw-5J-qYC" kind="show" identifier="toMakeTask" id="brB-Z8-OhM"/>
                     </connections>
@@ -636,6 +648,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Q6e-Ex-Ft2">
+                        <barButtonItem key="leftBarButtonItem" title="logout" image="arrowshape.turn.up.backward.fill" catalog="system" id="vqG-NS-SnE">
+                            <connections>
+                                <action selector="logout:" destination="MvW-6y-SLl" id="Zbk-IF-Td9"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Dp2-N0-6Rz">
                             <connections>
                                 <segue destination="0mB-ec-ldz" kind="presentation" id="CcE-Q7-ghP"/>
@@ -743,6 +760,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrowshape.turn.up.backward.fill" catalog="system" width="128" height="106"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

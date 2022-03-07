@@ -58,8 +58,11 @@ class makeUserViewController: UIViewController {
             //nilチェック
             guard let authResult = FIRAuthDataResult else {
                 print("error: SignUp")
+                print(Error.debugDescription)
                 return
             }
+            
+            print("progress middle")
             
             let reference = self.storageRef.child("userProfile").child("\(authResult.user.uid).jpg")
             
@@ -84,15 +87,15 @@ class makeUserViewController: UIViewController {
             ]
             
             
-            let db = Firebase.Firestore.firestore()
+            let db = Firestore.firestore()
             db.collection("users")
                 .document(authResult.user.uid)
                 .setData(addData)
             
+            print(authResult.user.uid)
             self.transition()
             
         }
-        
     }
     
     func skipLogin(){
@@ -109,6 +112,7 @@ class makeUserViewController: UIViewController {
         let tabView = storyboard.instantiateViewController(withIdentifier: "tab") as! UITabBarController
         tabView.modalPresentationStyle = .fullScreen
         tabView.selectedIndex = 0
+        print("do")
         self.present(tabView, animated: true, completion: nil)
     }
 }

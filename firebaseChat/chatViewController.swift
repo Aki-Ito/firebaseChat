@@ -98,8 +98,10 @@ class chatViewController: UIViewController {
 
                 print(self.addresses)
                 self.tableView.reloadData()
+                if self.addresses.isEmpty == false{
                 let indexPath = IndexPath(row: self.addresses.count-1, section: 0)
                 self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+                }
             }
     }
 
