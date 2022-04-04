@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qv3-He-CdR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qv3-He-CdR">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -669,6 +669,58 @@
             </objects>
             <point key="canvasLocation" x="3497.1014492753625" y="87.723214285714278"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="77I-oi-4ao">
+            <objects>
+                <viewController id="dZp-gH-BfE" customClass="ProfileViewController" customModule="firebaseChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hnJ-uO-r9g">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Name" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kDq-4i-q0c">
+                                <rect key="frame" x="87" y="414" width="240" height="69"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Email" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fkk-vD-Qwh">
+                                <rect key="frame" x="87" y="519" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LXj-zo-NDJ">
+                                <rect key="frame" x="143" y="204" width="128" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="Jcw-4t-Bp8"/>
+                                    <constraint firstAttribute="height" constant="128" id="ezg-U2-IQV"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zwQ-OH-gBO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="LXj-zo-NDJ" firstAttribute="centerX" secondItem="hnJ-uO-r9g" secondAttribute="centerX" id="jNh-jw-fcr"/>
+                            <constraint firstItem="LXj-zo-NDJ" firstAttribute="top" secondItem="zwQ-OH-gBO" secondAttribute="top" constant="160" id="jO2-zz-gcb"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="hnU-p6-1aZ"/>
+                    <connections>
+                        <outlet property="emailTextView" destination="fkk-vD-Qwh" id="Z1W-xc-Fmk"/>
+                        <outlet property="profileImageButton" destination="LXj-zo-NDJ" id="aws-3T-9eG"/>
+                        <outlet property="userNameTextView" destination="kDq-4i-q0c" id="YWB-f7-PCg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jgG-YU-zeV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2586.9565217391305" y="855.80357142857144"/>
+        </scene>
         <!--Chat View Controller-->
         <scene sceneID="EjG-yH-4ve">
             <objects>
@@ -681,24 +733,35 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="708"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuX-kO-oXH" customClass="GroupTaskView" customModule="firebaseChat" customModuleProvider="target">
+                                <rect key="frame" x="12" y="100" width="390" height="36"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="gPw-14-uAL"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Tcp-iM-CPK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="4dy-7I-qay" firstAttribute="top" secondItem="Tcp-iM-CPK" secondAttribute="top" id="03Y-PE-5wO"/>
+                            <constraint firstItem="AuX-kO-oXH" firstAttribute="leading" secondItem="Tcp-iM-CPK" secondAttribute="leading" constant="12" id="9gS-rA-Pgg"/>
+                            <constraint firstItem="AuX-kO-oXH" firstAttribute="top" secondItem="Tcp-iM-CPK" secondAttribute="top" constant="12" id="Kpy-fC-ieL"/>
                             <constraint firstItem="4dy-7I-qay" firstAttribute="leading" secondItem="Tcp-iM-CPK" secondAttribute="leading" id="LEB-Re-fto"/>
+                            <constraint firstItem="Tcp-iM-CPK" firstAttribute="trailing" secondItem="AuX-kO-oXH" secondAttribute="trailing" constant="12" id="ZG9-4A-XjG"/>
                             <constraint firstAttribute="bottom" secondItem="4dy-7I-qay" secondAttribute="bottom" constant="100" id="qMU-6M-HpR"/>
                             <constraint firstItem="Tcp-iM-CPK" firstAttribute="trailing" secondItem="4dy-7I-qay" secondAttribute="trailing" id="xq2-S1-Oc8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cyw-m8-qkd"/>
                     <connections>
+                        <outlet property="groupTaskView" destination="AuX-kO-oXH" id="4zt-jc-bnF"/>
                         <outlet property="tableView" destination="4dy-7I-qay" id="TRt-7O-Klg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k8z-3T-SRv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3497" y="814"/>
+            <point key="canvasLocation" x="3495.652173913044" y="855.80357142857144"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="tgx-J0-hqj">
@@ -714,6 +777,7 @@
                     <connections>
                         <segue destination="sMx-Rn-rns" kind="relationship" relationship="viewControllers" id="hMW-JX-UZt"/>
                         <segue destination="5tt-5b-VZv" kind="relationship" relationship="viewControllers" id="db5-2V-285"/>
+                        <segue destination="dZp-gH-BfE" kind="relationship" relationship="viewControllers" id="mNq-GP-NOf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="exw-BH-gLO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

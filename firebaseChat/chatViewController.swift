@@ -14,6 +14,7 @@ import FirebaseAuth
 
 class chatViewController: UIViewController {
 
+    @IBOutlet weak var groupTaskView: GroupTaskView!
     @IBOutlet weak var tableView: UITableView!
 
     let db = Firebase.Firestore.firestore()
@@ -42,6 +43,8 @@ class chatViewController: UIViewController {
 
         print("sentGroupId: \(sentGroupId)")
 
+        groupTaskView.layer.cornerRadius = 10
+        groupTaskView.layer.masksToBounds = true
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -114,6 +117,18 @@ class chatViewController: UIViewController {
     override var canBecomeFirstResponder: Bool{
         return true
     }
+    
+//    func showGroupTask(){
+//        UIView.animate(withDuration: 1.0, delay: 0, options: .curveLinear) {
+//            self.groupTaskView.alpha = 1
+//        }
+//    }
+//
+//    func hideGroupTask(){
+//        UIView.animate(withDuration: 1.0, delay: 0, options: .curveLinear) {
+//            self.groupTaskView.alpha = 0
+//        }
+//    }
 
     //    func recognizeUser(indexPath: IndexPath){
     //        let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! chatTableViewCell
@@ -161,6 +176,8 @@ extension chatViewController: UITableViewDelegate, UITableViewDataSource{
         //textViewの文字列の長さによって高さを自動調節する
         return UITableView.automaticDimension
     }
+    
+    
 }
 
 extension chatViewController: messageInputAccesoryViewDelegate{
