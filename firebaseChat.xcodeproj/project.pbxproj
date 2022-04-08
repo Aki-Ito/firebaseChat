@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		166B7C1805C377AAD564E2A5 /* Pods_firebaseChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7844D097FCF2B4BA16B0A218 /* Pods_firebaseChat.framework */; };
 		2C02082227FB231E00C0C58C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C02082127FB231E00C0C58C /* ProfileViewController.swift */; };
+		2C1274A7280008A0005721F6 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1274A5280008A0005721F6 /* MenuTableViewCell.swift */; };
+		2C1274A8280008A0005721F6 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C1274A6280008A0005721F6 /* MenuTableViewCell.xib */; };
 		2C58B4B0273EE5C100846D53 /* makeRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C58B4AF273EE5C100846D53 /* makeRoomViewController.swift */; };
 		2C58B4B3273F434000846D53 /* groupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C58B4B1273F434000846D53 /* groupCollectionViewCell.swift */; };
 		2C58B4B4273F434000846D53 /* groupCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C58B4B2273F434000846D53 /* groupCollectionViewCell.xib */; };
@@ -40,6 +42,7 @@
 		2CA52A2027A53B60007C4016 /* OuterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA52A1E27A53B60007C4016 /* OuterCollectionViewCell.xib */; };
 		2CA52A2327A5434D007C4016 /* InnerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA52A2127A5434D007C4016 /* InnerCollectionViewCell.swift */; };
 		2CA52A2427A5434D007C4016 /* InnerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA52A2227A5434D007C4016 /* InnerCollectionViewCell.xib */; };
+		2CF55EF027FEB13A0065FC59 /* ToDoMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF55EEF27FEB13A0065FC59 /* ToDoMenuViewController.swift */; };
 		59EFFCC4C120976491021D48 /* Pods_firebaseChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3D2831331FDE8DD252860C2 /* Pods_firebaseChatTests.framework */; };
 		5EFE469AC94835E313967BE2 /* Pods_firebaseChat_firebaseChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5D5632D57DB07CE74E16F8 /* Pods_firebaseChat_firebaseChatUITests.framework */; };
 /* End PBXBuildFile section */
@@ -64,6 +67,8 @@
 /* Begin PBXFileReference section */
 		1E8FBC7163D94F87D2F0F800 /* Pods-firebaseChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-firebaseChat.release.xcconfig"; path = "Target Support Files/Pods-firebaseChat/Pods-firebaseChat.release.xcconfig"; sourceTree = "<group>"; };
 		2C02082127FB231E00C0C58C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		2C1274A5280008A0005721F6 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		2C1274A6280008A0005721F6 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
 		2C58B4AF273EE5C100846D53 /* makeRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makeRoomViewController.swift; sourceTree = "<group>"; };
 		2C58B4B1273F434000846D53 /* groupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = groupCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C58B4B2273F434000846D53 /* groupCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = groupCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -99,6 +104,7 @@
 		2CA52A1E27A53B60007C4016 /* OuterCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OuterCollectionViewCell.xib; sourceTree = "<group>"; };
 		2CA52A2127A5434D007C4016 /* InnerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerCollectionViewCell.swift; sourceTree = "<group>"; };
 		2CA52A2227A5434D007C4016 /* InnerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InnerCollectionViewCell.xib; sourceTree = "<group>"; };
+		2CF55EEF27FEB13A0065FC59 /* ToDoMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoMenuViewController.swift; sourceTree = "<group>"; };
 		2F6CE09E0A5A9CE7DAC5C0B9 /* Pods-firebaseChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-firebaseChatTests.debug.xcconfig"; path = "Target Support Files/Pods-firebaseChatTests/Pods-firebaseChatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		477D85EC3B7DD6D518808412 /* Pods-firebaseChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-firebaseChat.debug.xcconfig"; path = "Target Support Files/Pods-firebaseChat/Pods-firebaseChat.debug.xcconfig"; sourceTree = "<group>"; };
 		7844D097FCF2B4BA16B0A218 /* Pods_firebaseChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_firebaseChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +156,40 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		2C1274A3280004EE005721F6 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2C58B4AF273EE5C100846D53 /* makeRoomViewController.swift */,
+				2C58B4B5273F469800846D53 /* displayGroupsViewController.swift */,
+				2C58B4F5274644B600846D53 /* chatViewController.swift */,
+				2C58B4F727464AC100846D53 /* makeUserViewController.swift */,
+				2C58B4F927464B5200846D53 /* approveUserViewController.swift */,
+				2CA52A1927A4E51E007C4016 /* makeTaskViewController.swift */,
+				2CA52A1B27A53855007C4016 /* myTaskViewController.swift */,
+				2C6AAA6727B801D800769424 /* DailyTasksViewController.swift */,
+				2C02082127FB231E00C0C58C /* ProfileViewController.swift */,
+				2CF55EEF27FEB13A0065FC59 /* ToDoMenuViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2C1274A428000520005721F6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2C58B4B1273F434000846D53 /* groupCollectionViewCell.swift */,
+				2C58B4B2273F434000846D53 /* groupCollectionViewCell.xib */,
+				2C70C173274DFDE200FDF55A /* chatTableViewCell.swift */,
+				2C70C174274DFDE200FDF55A /* chatTableViewCell.xib */,
+				2CA52A1D27A53B60007C4016 /* OuterCollectionViewCell.swift */,
+				2CA52A1E27A53B60007C4016 /* OuterCollectionViewCell.xib */,
+				2CA52A2127A5434D007C4016 /* InnerCollectionViewCell.swift */,
+				2CA52A2227A5434D007C4016 /* InnerCollectionViewCell.xib */,
+				2C1274A5280008A0005721F6 /* MenuTableViewCell.swift */,
+				2C1274A6280008A0005721F6 /* MenuTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		2C5FEE5C273ED96E00927E20 = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +215,8 @@
 		2C5FEE67273ED96E00927E20 /* firebaseChat */ = {
 			isa = PBXGroup;
 			children = (
+				2C1274A428000520005721F6 /* Cell */,
+				2C1274A3280004EE005721F6 /* ViewController */,
 				2C5FEE68273ED96E00927E20 /* AppDelegate.swift */,
 				2C5FEE6A273ED96E00927E20 /* SceneDelegate.swift */,
 				2C5FEE6C273ED96E00927E20 /* ViewController.swift */,
@@ -183,28 +225,11 @@
 				2C5FEE73273ED97100927E20 /* LaunchScreen.storyboard */,
 				2C5FEE76273ED97100927E20 /* Info.plist */,
 				2C5FEE98273EDB6500927E20 /* GoogleService-Info.plist */,
-				2C58B4AF273EE5C100846D53 /* makeRoomViewController.swift */,
-				2C58B4B1273F434000846D53 /* groupCollectionViewCell.swift */,
-				2C58B4B2273F434000846D53 /* groupCollectionViewCell.xib */,
-				2C58B4B5273F469800846D53 /* displayGroupsViewController.swift */,
-				2C58B4F5274644B600846D53 /* chatViewController.swift */,
-				2C58B4F727464AC100846D53 /* makeUserViewController.swift */,
-				2C58B4F927464B5200846D53 /* approveUserViewController.swift */,
-				2C70C173274DFDE200FDF55A /* chatTableViewCell.swift */,
-				2C70C174274DFDE200FDF55A /* chatTableViewCell.xib */,
 				2C70C177274F7BB400FDF55A /* inputAccesoryView.xib */,
 				2C70C179274F80A800FDF55A /* messageInputAccesoryView.swift */,
-				2CA52A1927A4E51E007C4016 /* makeTaskViewController.swift */,
-				2CA52A1B27A53855007C4016 /* myTaskViewController.swift */,
-				2CA52A1D27A53B60007C4016 /* OuterCollectionViewCell.swift */,
-				2CA52A1E27A53B60007C4016 /* OuterCollectionViewCell.xib */,
-				2CA52A2127A5434D007C4016 /* InnerCollectionViewCell.swift */,
-				2CA52A2227A5434D007C4016 /* InnerCollectionViewCell.xib */,
 				2C71DF7327B7D5AF00D887BC /* authStateManagement.swift */,
-				2C6AAA6727B801D800769424 /* DailyTasksViewController.swift */,
 				2C7885C127DB1B080001856E /* GroupTaskView.swift */,
 				2C7885C327DB1B1C0001856E /* GroupTaskView.xib */,
-				2C02082127FB231E00C0C58C /* ProfileViewController.swift */,
 			);
 			path = firebaseChat;
 			sourceTree = "<group>";
@@ -353,6 +378,7 @@
 				2C58B4B4273F434000846D53 /* groupCollectionViewCell.xib in Resources */,
 				2C70C176274DFDE200FDF55A /* chatTableViewCell.xib in Resources */,
 				2C5FEE72273ED97100927E20 /* Assets.xcassets in Resources */,
+				2C1274A8280008A0005721F6 /* MenuTableViewCell.xib in Resources */,
 				2CA52A2427A5434D007C4016 /* InnerCollectionViewCell.xib in Resources */,
 				2C5FEE70273ED96E00927E20 /* Main.storyboard in Resources */,
 			);
@@ -484,6 +510,7 @@
 			files = (
 				2C6AAA6827B801D800769424 /* DailyTasksViewController.swift in Sources */,
 				2C5FEE6D273ED96E00927E20 /* ViewController.swift in Sources */,
+				2C1274A7280008A0005721F6 /* MenuTableViewCell.swift in Sources */,
 				2C58B4B0273EE5C100846D53 /* makeRoomViewController.swift in Sources */,
 				2C5FEE69273ED96E00927E20 /* AppDelegate.swift in Sources */,
 				2CA52A1A27A4E51E007C4016 /* makeTaskViewController.swift in Sources */,
@@ -499,6 +526,7 @@
 				2C58B4FA27464B5200846D53 /* approveUserViewController.swift in Sources */,
 				2CA52A2327A5434D007C4016 /* InnerCollectionViewCell.swift in Sources */,
 				2C58B4B6273F469800846D53 /* displayGroupsViewController.swift in Sources */,
+				2CF55EF027FEB13A0065FC59 /* ToDoMenuViewController.swift in Sources */,
 				2CA52A1F27A53B60007C4016 /* OuterCollectionViewCell.swift in Sources */,
 				2C70C17A274F80A800FDF55A /* messageInputAccesoryView.swift in Sources */,
 			);
