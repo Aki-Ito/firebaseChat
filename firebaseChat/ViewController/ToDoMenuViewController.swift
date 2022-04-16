@@ -13,6 +13,7 @@ class ToDoMenuViewController: UIViewController {
         
     @IBOutlet weak var tableView: UITableView!
 
+    var isComplete: Bool = true
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,16 +21,19 @@ class ToDoMenuViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "MenuCell")
 
-        let menuPosition = self.menuView.layer.position
-        print(menuPosition)
-        self.menuView.layer.position.x = -self.menuView.layer.frame.width
-        print(self.menuView.layer.position.x)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let menuPos = self.menuView.layer.position
+        self.menuView.layer.position.x = -self.menuView.frame.width
         
         UIView.animate(withDuration: 0.5,
                        delay: 0,
-                       options: .curveEaseInOut,
-                       animations: {self.menuView.layer.position.x = menuPosition.x},
-                       completion: nil)
+                       options:.curveEaseOut,
+                       animations: {self.menuView.layer.position.x = menuPos.x},
+                       completion: {bool in})
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -60,5 +64,29 @@ extension ToDoMenuViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch indexPath.row{
+        case 0: isComplete = true
+        case 1: isComplete = false
+        default:
+          print("error")
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        let preNC = self.presentingViewController as! UINavigationController
+                let preVC = preNC.viewControllers[preNC.viewControllers.count - 1] as! myTaskViewController
+        preVC.isComplete = self.isComplete
+        preVC.configureTimeArray()
+        print(preVC.isComplete)
+                //記述することでNavigationControllerの一個前の画面に戻れる
+
+        UIView.animate(withDuration: 0.2,
+                       delay: 0,
+                       options: .curveEaseIn,
+                       animations: {self.menuView.layer.position.x = -self.menuView.frame.width},
+                       completion: {bool in self.dismiss(animated: true, completion: nil)})
     }
 }

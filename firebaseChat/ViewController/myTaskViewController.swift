@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
@@ -14,41 +13,45 @@ class myTaskViewController: UIViewController {
     
     @IBOutlet weak var OuterCollectionView: UICollectionView!
     @IBOutlet weak var button: UIButton!
-
+    
     let db = Firestore.firestore()
     let user = Auth.auth().currentUser
     var timeArray = [String]()
-    var addresses: [[String : Any]] = []
+    var todoArray: [[String : Any]] = []
+    var completeArray: [[String : Any]] = []
+    var addresses: [[String: Any]] = []
     var date = String()
     
     var viewWidth: CGFloat = 0.0
     
+    var isComplete: Bool = true
+    
     var startingFrame : CGRect!
-        var endingFrame : CGRect!
-
-        func scrollViewDidScroll(_ scrollView: UIScrollView) {
-            if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) && self.button.isHidden {
-             self.button.isHidden = false
-             self.button.frame = startingFrame
-             UIView.animate(withDuration: 1.0) {
-              self.button.frame = self.endingFrame
-             }
+    var endingFrame : CGRect!
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) && self.button.isHidden {
+            self.button.isHidden = false
+            self.button.frame = startingFrame
+            UIView.animate(withDuration: 1.0) {
+                self.button.frame = self.endingFrame
             }
         }
-        func configureSizes() {
-            let screenSize = UIScreen.main.bounds
-            let screenWidth = screenSize.width
-            let screenHeight = screenSize.height
-
-            startingFrame = CGRect(x: 0, y: screenHeight+100, width: screenWidth, height: 100)
-            endingFrame = CGRect(x: 0, y: screenHeight-100, width: screenWidth, height: 100)
-
-        }
+    }
+    func configureSizes() {
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        startingFrame = CGRect(x: 0, y: screenHeight+100, width: screenWidth, height: 100)
+        endingFrame = CGRect(x: 0, y: screenHeight-100, width: screenWidth, height: 100)
+        
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         button.layer.cornerRadius = 32
         button.layer.shadowOpacity = 0.25 //影の濃さ
         button.layer.shadowColor = UIColor.black.cgColor //影の色
@@ -82,9 +85,12 @@ class myTaskViewController: UIViewController {
             .addSnapshotListener{QuerySnapshot, Error in
                 guard let querySnapshot = QuerySnapshot else {return}
                 
+                self.todoArray.removeAll()
                 self.addresses.removeAll()
+                self.completeArray.removeAll()
+                
+                
                 for doc in querySnapshot.documents{
-                    print("データ:\(doc)")
                     let timeStamp = doc.data()["time"] as! Timestamp
                     let date = doc.data()["date"] as! String
                     let content = doc.data()["content"] as! String
@@ -96,10 +102,8 @@ class myTaskViewController: UIViewController {
                     
                     let time: Date = timeStamp.dateValue()
                     
-                    self.timeArray.append(date)
-                    let orderedSet: NSOrderedSet = NSOrderedSet(array: self.timeArray)
-                    self.timeArray = orderedSet.array as! [String]
-                  
+                    
+                    
                     self.addresses.append(
                         ["date": date,
                          "time": time,
@@ -111,32 +115,88 @@ class myTaskViewController: UIViewController {
                          "documentID": doc.documentID,
                          "isComplete": isComplete]
                     )
+                    
+                    switch isComplete{
+                    case true:
+                        self.completeArray.append(
+                            ["date": date,
+                             "time": time,
+                             "content": content,
+                             "red": rgbRed,
+                             "blue": rgbBlue,
+                             "green": rgbGreen,
+                             "alpha": alpha,
+                             "documentID": doc.documentID,
+                             "isComplete": isComplete]
+                        )
+                        
+                        self.configureTimeArray()
+                        
+                    case false:
+                        self.todoArray.append(
+                            ["date": date,
+                             "time": time,
+                             "content": content,
+                             "red": rgbRed,
+                             "blue": rgbBlue,
+                             "green": rgbGreen,
+                             "alpha": alpha,
+                             "documentID": doc.documentID,
+                             "isComplete": isComplete]
+                        )
+                       
+                        self.configureTimeArray()
+                        
+                    }
+                    
                 }
+                
                 self.OuterCollectionView.reloadData()
             }
- 
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
-            print("---画面B:\(#function)")
+        super.viewDidAppear(animated)
+        print("---画面B:\(#function)")
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("---画面B:\(#function)")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("---画面B:\(#function)")
+    }
+    
+    func configureTimeArray(){
+        timeArray.removeAll()
+        switch isComplete{
+        case true:
+            for content in completeArray{
+                let contentTime = content["date"] as! String
+                timeArray.append(contentTime)
+                let orderedSet: NSOrderedSet = NSOrderedSet(array: self.timeArray)
+                self.timeArray = orderedSet.array as! [String]
+            }
+        case false:
+            for content in todoArray{
+                let contentTime = content["date"] as! String
+                timeArray.append(contentTime)
+                let orderedSet: NSOrderedSet = NSOrderedSet(array: self.timeArray)
+                self.timeArray = orderedSet.array as! [String]
+            }
         }
-        override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(animated)
-            print("---画面B:\(#function)")
-        }
-        override func viewDidDisappear(_ animated: Bool) {
-            super.viewDidDisappear(animated)
-            print("---画面B:\(#function)")
-        }
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDailyTasks"{
             let vc = segue.destination as! DailyTasksViewController
             vc.addresses = self.addresses
+//            vc.completeArray = self.completeArray
+//            vc.taskArray = self.todoArray
             vc.date = self.date
+            vc.isComplete = self.isComplete
         }
     }
     
@@ -144,6 +204,11 @@ class myTaskViewController: UIViewController {
     @IBAction func tappedAddButton(_ sender: Any) {
         self.performSegue(withIdentifier: "toMakeTask", sender: nil)
     }
+    
+    @IBAction func menuButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "toMenu", sender: nil)
+    }
+    
     
 }
 
@@ -161,8 +226,14 @@ extension myTaskViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.layer.masksToBounds = false
         
         cell.dateLabel.text = timeArray[indexPath.row]
-        cell.configureCell(contentArray: addresses, date: timeArray[indexPath.row])
-        print(cell.layer.cornerRadius)
+        switch isComplete{
+        case true:
+            cell.configureCell(contentArray: completeArray, date: timeArray[indexPath.row])
+            self.OuterCollectionView.reloadData()
+        case false:
+            cell.configureCell(contentArray: todoArray, date: timeArray[indexPath.row])
+            self.OuterCollectionView.reloadData()
+        }
         return cell
     }
     

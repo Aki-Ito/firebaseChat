@@ -17,6 +17,7 @@ class DailyTasksViewController: UIViewController {
     var date = String()
     var taskArray: [[String : Any]] = []
     var completeArray: [[String: Any]] = []
+    var isComplete = Bool()
     
     let db = Firestore.firestore()
     let user = Auth.auth().currentUser
@@ -45,13 +46,15 @@ class DailyTasksViewController: UIViewController {
     
     func addComponent(){
         taskArray.removeAll()
+        completeArray.removeAll()
         for content in addresses{
             let contentDate = content["date"] as! String
             let isComplete = content["isComplete"] as! Bool
             if contentDate == date && isComplete == false{
                 taskArray.append(content)
-            }else if contentDate == date || isComplete == true{
+            }else if contentDate == date && isComplete == true{
                 completeArray.append(content)
+                print(completeArray)
             }
         }
         collectionView.reloadData()
@@ -65,13 +68,35 @@ extension DailyTasksViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InnerCell", for: indexPath) as! InnerCollectionViewCell
-        let rgbRed = taskArray[indexPath.row]["red"] as! CGFloat
-        let rgbBlue = taskArray[indexPath.row]["blue"] as! CGFloat
-        let rgbGreen = taskArray[indexPath.row]["green"] as! CGFloat
-        let alpha = taskArray[indexPath.row]["alpha"] as! CGFloat
         
-        cell.backgroundColor = UIColor(red: rgbRed, green: rgbGreen, blue: rgbBlue, alpha: alpha)
-        cell.contentLabel.text = taskArray[indexPath.row]["content"] as? String
+        
+        switch isComplete{
+        case true:
+            let rgbRed = completeArray[indexPath.row]["red"] as! CGFloat
+            let rgbBlue = completeArray[indexPath.row]["blue"] as! CGFloat
+            let rgbGreen = completeArray[indexPath.row]["green"] as! CGFloat
+            let alpha = completeArray[indexPath.row]["alpha"] as! CGFloat
+            
+            cell.backgroundColor = UIColor(red: rgbRed, green: rgbGreen, blue: rgbBlue, alpha: alpha)
+            cell.contentLabel.text = completeArray[indexPath.row]["content"] as? String
+        case false:
+            let rgbRed = taskArray[indexPath.row]["red"] as! CGFloat
+            let rgbBlue = taskArray[indexPath.row]["blue"] as! CGFloat
+            let rgbGreen = taskArray[indexPath.row]["green"] as! CGFloat
+            let alpha = taskArray[indexPath.row]["alpha"] as! CGFloat
+            
+            cell.backgroundColor = UIColor(red: rgbRed, green: rgbGreen, blue: rgbBlue, alpha: alpha)
+            cell.contentLabel.text = taskArray[indexPath.row]["content"] as? String
+        }
+        
+        
+        //        let rgbRed = taskArray[indexPath.row]["red"] as! CGFloat
+        //        let rgbBlue = taskArray[indexPath.row]["blue"] as! CGFloat
+        //        let rgbGreen = taskArray[indexPath.row]["green"] as! CGFloat
+        //        let alpha = taskArray[indexPath.row]["alpha"] as! CGFloat
+        //
+        //        cell.backgroundColor = UIColor(red: rgbRed, green: rgbGreen, blue: rgbBlue, alpha: alpha)
+        //        cell.contentLabel.text = taskArray[indexPath.row]["content"] as? String
         return cell
     }
     
@@ -80,7 +105,10 @@ extension DailyTasksViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        taskArray.count
+        switch isComplete{
+        case true: return completeArray.count
+        case false: return taskArray.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -98,26 +126,33 @@ extension DailyTasksViewController: UICollectionViewDelegate, UICollectionViewDa
             
             //タイトルとイメージを設定できる。
             
-                let complete = UIAction(title: "Complete", image: nil, identifier: UIAction.Identifier(rawValue: "complete")) { _ in
-                    // 押された際にアクションをする
-                    let selectedDocID = self.taskArray[indexPath.row]["documentID"] as! String
-                    self.taskArray[indexPath.row]["isComplete"] = true
-                    guard let user = self.user else {return}
-                    self.db.collection("users")
-                        .document(user.uid)
-                        .collection("tasks")
-                        .document(selectedDocID)
-                        .setData(self.taskArray[indexPath.row], merge: true)
-                    
-                    self.completeArray.append(self.taskArray[indexPath.row])
-                    self.taskArray.remove(at: indexPath.row)
+            let complete = UIAction(title: "Complete", image: nil, identifier: UIAction.Identifier(rawValue: "complete")) { _ in
+                // 押された際にアクションをする
+                let selectedDocID = self.taskArray[indexPath.row]["documentID"] as! String
+                self.taskArray[indexPath.row]["isComplete"] = true
+                guard let user = self.user else {return}
+                self.db.collection("users")
+                    .document(user.uid)
+                    .collection("tasks")
+                    .document(selectedDocID)
+                    .setData(self.taskArray[indexPath.row], merge: true)
+                
+                self.completeArray.append(self.taskArray[indexPath.row])
                 
             }
             
             
             let delete = UIAction(title: "delete", image: UIImage(systemName: "trash"), identifier: UIAction.Identifier(rawValue: "delete")){ [self] _ in
                 
-                let selectedDocID = self.taskArray[indexPath.row]["documentID"] as! String
+                var selectedDocID = String()
+                switch isComplete{
+                case true:
+                    selectedDocID = self.completeArray[indexPath.row]["documentID"] as! String
+                    
+                case false:
+                    selectedDocID = self.taskArray[indexPath.row]["documentID"] as! String
+                    
+                }
                 guard let user = self.user else {return}
                 self.db.collection("users")
                     .document(user.uid)
@@ -128,14 +163,19 @@ extension DailyTasksViewController: UICollectionViewDelegate, UICollectionViewDa
                             print("Error removing document: \(err)")
                         } else {
                             print("Document successfully removed!")
-                            self.taskArray.remove(at: indexPath.row)
+                          
+                            switch self.isComplete{
+                            case true: self.completeArray.remove(at: indexPath.row)
+                            case false: self.taskArray.remove(at: indexPath.row)
+                            }
                             self.collectionView.reloadData()
                             
-                            if self.taskArray.isEmpty{
+                            if self.taskArray.isEmpty || self.completeArray.isEmpty{
                                 let preNC = self.navigationController!
                                 let preVC = preNC.viewControllers[preNC.viewControllers.count - 2] as! myTaskViewController
                                 
-                                preVC.timeArray.removeAll(where: {$0 == self.date})
+//                                preVC.timeArray.removeAll(where: {$0 == self.date})
+                                preVC.configureTimeArray()
                             }
                         }
                     }
